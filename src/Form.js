@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import plantumlEncoder from "plantuml-encoder";
+import './Form.css'
 
 class Form extends Component {
     plantuml_url: string;

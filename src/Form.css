@@ -1,0 +1,10 @@
+form {
+    position: fixed;
+    width: 99%;
+    height: 55%;
+}
+
+textarea {
+    width: 100%;
+    height: 90%;
+}
