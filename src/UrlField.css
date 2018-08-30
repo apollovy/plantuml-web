@@ -1,0 +1,17 @@
+div.url-wrapper {
+    width: 99%;
+    display: table;
+}
+
+div.url-input {
+    display: table-cell;
+}
+
+input.url-input {
+    width: 100%;
+}
+
+div.url-copy-button {
+    display: table-cell;
+    width: 1px;
+}

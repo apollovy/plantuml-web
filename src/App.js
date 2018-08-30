@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Form from "./Form";
 import Image from "./Image";
+import UrlField from "./UrlField";
 
 class App extends Component {
     constructor(props) {
@@ -16,19 +17,23 @@ class App extends Component {
                 />
             ),
             image: <Image/>,
-            url: '',
+            urlField: <UrlField/>,
         };
     }
 
     render() {
         return [
             this.state.form,
+            this.state.urlField,
             this.state.image,
         ]
     }
 
     onFormSubmit(url: string) {
-        this.setState({image: <Image url={url} key={url + Date.now()}/>})
+        this.setState({
+            image: <Image url={url} key={url + Date.now()}/>,
+            urlField: <UrlField url={url}/>
+        })
     }
 }
 
