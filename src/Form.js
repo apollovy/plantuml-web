@@ -4,37 +4,44 @@ import './Form.css'
 
 class Form extends Component {
     plantuml_url: string;
+    onSubmit: (x: string) => void;
 
     constructor(props) {
         super(props);
-        this.state = {
-            text: '',
-        };
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+
+        this.state = {
+            form: (
+                <form onSubmit={this.handleSubmit}>
+                    <textarea onChange={this.handleChange}/>
+                    <input type="submit"/>
+                </form>
+            ),
+            text: '',
+        };
     }
 
     render() {
-        return (
-            <form method="GET" onSubmit={this.handleSubmit}>
-                <textarea onChange={this.handleChange}/>
-                <input type="submit"/>
-            </form>
-        )
+        return this.state.form
     }
 
     handleSubmit(event: Event) {
         event.preventDefault();
 
         let encoded = plantumlEncoder.encode(this.state.text);
-        console.log(encoded);
-        // let url = this.props.plantuml_url + '/png/' + encoded;
-
+        this.props.onSubmit(this.props.plantuml_url + '/png/' + encoded);
     }
 
     handleChange(event: Event) {
-        this.setState({text: event.target.value})
+        let target = event.target;
+
+        if (target.scrollTop) {
+            target.style.height = target.scrollHeight + 20 + 'px';
+        }
+
+        this.setState({text: target.value})
     }
 }
 
