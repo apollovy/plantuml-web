@@ -1,0 +1,14 @@
+@startuml
+
+package plantuml_react {
+    component App {
+        component Form {
+            component TextArea
+            component SubmitButton
+        }
+        component UrlField
+        component Image
+    }
+}
+
+@enduml
