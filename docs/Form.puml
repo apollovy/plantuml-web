@@ -1,0 +1,11 @@
+@startuml
+
+!include _lib.iuml
+
+component Form {
+    renderComponent(TextArea)
+    renderComponent(SubmitButton)
+}
+
+
+@enduml

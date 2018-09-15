@@ -1,0 +1,11 @@
+@startuml
+
+!include _lib.iuml
+
+component Block {
+    renderComponent(Form)
+    renderComponent(UrlField)
+    renderComponent(Image)
+}
+
+@enduml

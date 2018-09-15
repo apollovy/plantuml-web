@@ -1,0 +1,10 @@
+@startuml
+
+!include _lib.iuml
+
+component App {
+    renderComponent(Block)
+    renderComponent(AddBlockButton)
+}
+
+@enduml

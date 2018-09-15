@@ -1,0 +1,7 @@
+!definelong renderComponent(x)
+!ifdef RENDER_DEEP
+    !include x##.puml
+!else
+    [x]
+!endif
+!enddefinelong
