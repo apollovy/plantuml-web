@@ -3,8 +3,11 @@ import Form from "./Form";
 import Image from "./Image";
 import UrlField from "./UrlField";
 import DBManager from "./DBManager";
+import plantumlEncoder from "plantuml-encoder";
 
 class Block extends Component {
+    plantuml_url = "http://plantuml.com/plantuml";
+
     blockId: number;
     text: string;
     dbManager: DBManager;
@@ -12,18 +15,20 @@ class Block extends Component {
     constructor(props) {
         super(props);
 
+        const text = props.text;
+        const url = this.urlFromText(text);
+
         this.state = {
             form: (
                 <Form
-                    plantuml_url="http://plantuml.com/plantuml"
-                    onSubmit={url => this.onFormSubmit(url)}
+                    onSubmit={text => this.onFormSubmit(text)}
                     blockId={props.blockId}
                     dbManager={props.dbManager}
-                    text={props.text}
+                    text={text}
                 />
             ),
-            image: <Image/>,
-            urlField: <UrlField/>,
+            image: this.renderImage(url),
+            urlField: this.renderUrlField(url),
         };
     }
 
@@ -35,11 +40,27 @@ class Block extends Component {
         ]
     }
 
-    onFormSubmit(url: string) {
+    onFormSubmit(text: string) {
+        const url = this.urlFromText(text);
         this.setState({
-            image: <Image url={url} key={url + Date.now()}/>,
-            urlField: <UrlField url={url}/>
+            image: this.renderImage(url),
+            urlField: this.renderUrlField(url)
         })
+    }
+
+    urlFromText(text) {
+        const encoded = plantumlEncoder.encode(text);
+        return this.plantuml_url + '/png/' + encoded;
+    }
+
+    // noinspection JSMethodCanBeStatic
+    renderImage(url: string) {
+        return <Image url={url} key={url + Date.now()}/>
+    }
+
+    // noinspection JSMethodCanBeStatic
+    renderUrlField(url) {
+        return <UrlField url={url}/>;
     }
 }
 

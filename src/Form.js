@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
-import plantumlEncoder from "plantuml-encoder";
 import './Form.css'
 import DBManager from "./DBManager";
 
 class Form extends Component {
-    plantuml_url: string;
     onSubmit: (x: string) => void;
     blockId: number;
     dbManager: DBManager;
@@ -32,9 +30,7 @@ class Form extends Component {
 
     handleSubmit(event: Event) {
         event.preventDefault();
-
-        let encoded = plantumlEncoder.encode(this.state.text);
-        this.props.onSubmit(this.props.plantuml_url + '/png/' + encoded);
+        this.props.onSubmit(this.state.text);
     }
 
     handleChange(event: Event) {
