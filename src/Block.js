@@ -2,18 +2,25 @@ import React, {Component} from 'react';
 import Form from "./Form";
 import Image from "./Image";
 import UrlField from "./UrlField";
+import DBManager from "./DBManager";
 
 class Block extends Component {
+    blockId: number;
+    text: string;
+    dbManager: DBManager;
+    defaultText = Form.defaultText;
+
     constructor(props) {
         super(props);
-
-        this.onFormSubmit = this.onFormSubmit.bind(this);
 
         this.state = {
             form: (
                 <Form
                     plantuml_url="http://plantuml.com/plantuml"
-                    onSubmit={this.onFormSubmit}
+                    onSubmit={url => this.onFormSubmit(url)}
+                    blockId={props.blockId}
+                    dbManager={props.dbManager}
+                    text={props.text}
                 />
             ),
             image: <Image/>,

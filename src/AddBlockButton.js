@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import './AddBlockButton.css'
 
 class AddBlockButton extends Component {
+    onClick: (Event) => null;
+
     render() {
         return (
             <button

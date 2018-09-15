@@ -1,0 +1,1 @@
+export type Texts = Object<string>;

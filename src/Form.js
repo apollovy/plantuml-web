@@ -1,25 +1,29 @@
 import React, {Component} from 'react';
 import plantumlEncoder from "plantuml-encoder";
 import './Form.css'
+import DBManager from "./DBManager";
 
 class Form extends Component {
+    defaultText = '';
+
     plantuml_url: string;
     onSubmit: (x: string) => void;
+    blockId: number;
+    dbManager: DBManager;
+    text: string;
 
     constructor(props) {
         super(props);
 
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-
         this.state = {
             form: (
-                <form onSubmit={this.handleSubmit}>
-                    <textarea onChange={this.handleChange}/>
+                <form onSubmit={e => this.handleSubmit(e)}>
+                    <textarea onChange={e => this.handleChange(e)}
+                              defaultValue={props.text}/>
                     <input type="submit"/>
                 </form>
             ),
-            text: '',
+            text: this.defaultText,
         };
     }
 
@@ -35,13 +39,16 @@ class Form extends Component {
     }
 
     handleChange(event: Event) {
-        let target = event.target;
+        const target = event.target;
+        const text = target.value;
+
+        this.setState({text: text});
+        this.props.dbManager.update(this.props.blockId, text);
 
         if (target.scrollTop) {
             target.style.height = target.scrollHeight + 20 + 'px';
         }
 
-        this.setState({text: target.value})
     }
 }
 
