@@ -4,8 +4,6 @@ import './Form.css'
 import DBManager from "./DBManager";
 
 class Form extends Component {
-    defaultText = '';
-
     plantuml_url: string;
     onSubmit: (x: string) => void;
     blockId: number;
@@ -15,15 +13,16 @@ class Form extends Component {
     constructor(props) {
         super(props);
 
+        const text = props.text;
         this.state = {
             form: (
                 <form onSubmit={e => this.handleSubmit(e)}>
                     <textarea onChange={e => this.handleChange(e)}
-                              defaultValue={props.text}/>
+                              defaultValue={text}/>
                     <input type="submit"/>
                 </form>
             ),
-            text: this.defaultText,
+            text: text,
         };
     }
 

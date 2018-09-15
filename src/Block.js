@@ -8,7 +8,6 @@ class Block extends Component {
     blockId: number;
     text: string;
     dbManager: DBManager;
-    defaultText = Form.defaultText;
 
     constructor(props) {
         super(props);

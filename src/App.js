@@ -5,7 +5,7 @@ import DBManager from './DBManager'
 
 class App extends Component {
     dbManager = new DBManager();
-    defaultText = Block.defaultText;
+    defaultText = '';
 
     constructor(props) {
         super(props);
