@@ -16,54 +16,36 @@ class Block extends Component {
     constructor(props) {
         super(props);
 
-        const text = props.text;
-        const url = this.urlFromText(text);
-
         this.state = {
-            form: (
-                <Form
-                    onSubmit={text => this.onFormSubmit(text)}
-                    blockId={props.blockId}
-                    dbManager={props.dbManager}
-                    text={text}
-                />
-            ),
-            image: this.renderImage(url),
-            urlField: this.renderUrlField(url),
+            url: this.urlFromText(props.text),
         };
     }
 
     render() {
         return [
-            this.state.form,
-            this.state.urlField,
-            this.state.image,
-            <input type="button" onClick={e => this.destroy(e)}
+            <Form
+                onSubmit={text => this.onFormSubmit(text)}
+                blockId={this.props.blockId}
+                dbManager={this.props.dbManager}
+                text={this.props.text}
+                key="Form"
+            />,
+            <UrlField url={this.state.url} key="UrlField"/>,
+            <Image url={this.state.url} key="Image"/>,
+            <input type="button" onClick={e => this.destroy(e)} key="Delete"
                    value="Delete"/>
         ]
     }
 
     onFormSubmit(text: string) {
-        const url = this.urlFromText(text);
         this.setState({
-            image: this.renderImage(url),
-            urlField: this.renderUrlField(url)
+            url: this.urlFromText(text),
         })
     }
 
     urlFromText(text) {
         const encoded = plantumlEncoder.encode(text);
         return this.plantuml_url + '/png/' + encoded;
-    }
-
-    // noinspection JSMethodCanBeStatic
-    renderImage(url: string) {
-        return <Image url={url} key={url + Date.now()}/>
-    }
-
-    // noinspection JSMethodCanBeStatic
-    renderUrlField(url) {
-        return <UrlField url={url}/>;
     }
 
     destroy(e: Event) {
