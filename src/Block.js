@@ -29,11 +29,10 @@ class Block extends Component {
                 dbManager={this.props.dbManager}
                 text={this.props.text}
                 key="Form"
+                destroy={e => this.destroy(e)}
             />,
             <UrlField url={this.state.url} key="UrlField"/>,
             <Image url={this.state.url} key="Image"/>,
-            <input type="button" onClick={e => this.destroy(e)} key="Delete"
-                   value="Delete"/>
         ]
     }
 

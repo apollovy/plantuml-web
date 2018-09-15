@@ -8,6 +8,7 @@ class Form extends Component {
     blockId: number;
     dbManager: DBManager;
     text: string;
+    destroy: (e: Event) => null;
 
     constructor(props) {
         super(props);
@@ -25,6 +26,10 @@ class Form extends Component {
                         onChange={e => this.handleTextAreaChange(e)}
                     />
                 <input type="submit"/>
+                <button
+                    onClick={e => this.props.destroy(e)}
+                    key="Delete">Delete
+                </button>
             </form>
         )
     }
