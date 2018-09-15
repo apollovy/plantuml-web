@@ -16,7 +16,8 @@ class Form extends Component {
             form: (
                 <form onSubmit={e => this.handleSubmit(e)}>
                     <textarea onChange={e => this.handleChange(e)}
-                              defaultValue={text}/>
+                              defaultValue={text}
+                              onKeyUp={e => this.textAreaAdjust(e)}/>
                     <input type="submit"/>
                 </form>
             ),
@@ -39,11 +40,15 @@ class Form extends Component {
 
         this.setState({text: text});
         this.props.dbManager.update(this.props.blockId, text);
+    }
 
-        if (target.scrollTop) {
-            target.style.height = target.scrollHeight + 20 + 'px';
-        }
+    // noinspection JSMethodCanBeStatic
+    textAreaAdjust(e: Event) {
+        e.preventDefault();
 
+        const textArea = e.target;
+        textArea.style.height = "1px";
+        textArea.style.height = (25 + textArea.scrollHeight) + "px";
     }
 }
 
