@@ -1,38 +1,31 @@
 import React, {Component} from 'react';
-import Form from "./Form";
-import Image from "./Image";
-import UrlField from "./UrlField";
+import Block from './Block'
+import AddBlockButton from './AddBlockButton'
 
 class App extends Component {
     constructor(props) {
         super(props);
 
-        this.onFormSubmit = this.onFormSubmit.bind(this);
-
         this.state = {
-            form: (
-                <Form
-                    plantuml_url="http://plantuml.com/plantuml"
-                    onSubmit={this.onFormSubmit}
-                />
-            ),
-            image: <Image/>,
-            urlField: <UrlField/>,
+            blocks: [<Block/>],
+            addBlockButton: <AddBlockButton onClick={() => this.addBlock()}/>
         };
     }
 
     render() {
         return [
-            this.state.form,
-            this.state.urlField,
-            this.state.image,
+            this.state.blocks,
+            this.state.addBlockButton,
         ]
     }
 
-    onFormSubmit(url: string) {
-        this.setState({
-            image: <Image url={url} key={url + Date.now()}/>,
-            urlField: <UrlField url={url}/>
+    addBlock() {
+        this.setState((state) => {
+            const block = <Block/>;
+            const blocks = state.blocks.concat([block]);
+            return {
+                blocks: blocks,
+            }
         })
     }
 }
