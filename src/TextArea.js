@@ -23,13 +23,13 @@ export default class TextArea extends Component {
     handleKeyUp(e: Event) {
         e.preventDefault();
 
-        const textArea = e.target;
-        this.resize(textArea);
+        this.resize(this._textArea);
     }
 
     // noinspection JSMethodCanBeStatic
     resize(textArea) {
         const style = textArea.style;
-        style.height = (25 + textArea.scrollHeight + style.height) + "px";
+        style.height = "1px";
+        style.height = (25 + textArea.scrollHeight) + "px";
     }
 }
