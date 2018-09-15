@@ -4,7 +4,7 @@ class Image extends Component {
 
     render() {
         return (
-            <img src={this.props.url} alt='' hidden={!this.props.url}/>
+            <img src={this.props.url} alt='Diagram'/>
         )
     }
 }
