@@ -29,6 +29,12 @@ class DBManager {
         return texts;
     }
 
+    delete(index: number): null {
+        const texts = this.readAll();
+        delete texts[index];
+        this.replace(texts);
+    }
+
     readAll(): Texts {
         return JSON.parse(this.STORAGE.getItem(this.STATE_KEY));
     }

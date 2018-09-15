@@ -11,6 +11,7 @@ class Block extends Component {
     blockId: number;
     text: string;
     dbManager: DBManager;
+    destroyMe: (blockId: number) => null;
 
     constructor(props) {
         super(props);
@@ -37,6 +38,8 @@ class Block extends Component {
             this.state.form,
             this.state.urlField,
             this.state.image,
+            <input type="button" onClick={e => this.destroy(e)}
+                   value="Delete"/>
         ]
     }
 
@@ -61,6 +64,12 @@ class Block extends Component {
     // noinspection JSMethodCanBeStatic
     renderUrlField(url) {
         return <UrlField url={url}/>;
+    }
+
+    destroy(e: Event) {
+        e.preventDefault();
+
+        this.props.destroyMe(this.props.blockId);
     }
 }
 

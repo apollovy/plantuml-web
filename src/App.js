@@ -55,7 +55,19 @@ class App extends Component {
 
     buildBlock(blockId, text) {
         return <Block blockId={blockId} text={text} key={blockId}
-                      dbManager={this.dbManager}/>;
+                      dbManager={this.dbManager}
+                      destroyMe={blockId => this.removeBlock(blockId)}/>;
+    }
+
+    removeBlock(blockId: number) {
+        this.setState((state) => {
+            return {
+                blocks: state.blocks.filter((block) => {
+                    return block.props.blockId !== blockId;
+                })
+            }
+        });
+        this.dbManager.delete(blockId);
     }
 }
 
