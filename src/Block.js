@@ -11,7 +11,7 @@ class Block extends Component {
     blockId: number;
     text: string;
     dbManager: DBManager;
-    destroyMe: (blockId: number) => null;
+    destroyMe: () => null;
 
     constructor(props) {
         super(props);
@@ -51,7 +51,7 @@ class Block extends Component {
     destroy(e: Event) {
         e.preventDefault();
 
-        this.props.destroyMe(this.props.blockId);
+        this.props.destroyMe();
     }
 }
 

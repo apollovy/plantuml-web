@@ -14,15 +14,22 @@ class App extends Component {
 
         this.state = {
             blocks: blocks,
-            addBlockButton: <AddBlockButton onClick={() => this.addBlock()}
-                                            key="1"/>
         };
     }
 
     render() {
         return [
-            this.state.blocks,
-            this.state.addBlockButton,
+            this.state.blocks.map(
+                (block) => <Block
+                    blockId={block.blockId}
+                    text={block.text}
+                    key={block.blockId}
+                    dbManager={this.dbManager}
+                    destroyMe={() => this.removeBlock(block.blockId)}
+                />
+            ),
+            <AddBlockButton onClick={() => this.addBlock()}
+                            key="AddBlockButton"/>
         ]
     }
 
@@ -53,17 +60,19 @@ class App extends Component {
         });
     }
 
+    // noinspection JSMethodCanBeStatic
     buildBlock(blockId, text) {
-        return <Block blockId={blockId} text={text} key={blockId}
-                      dbManager={this.dbManager}
-                      destroyMe={blockId => this.removeBlock(blockId)}/>;
+        return {
+            blockId: blockId,
+            text: text,
+        }
     }
 
     removeBlock(blockId: number) {
         this.setState((state) => {
             return {
                 blocks: state.blocks.filter((block) => {
-                    return block.props.blockId !== blockId;
+                    return block.blockId !== blockId;
                 })
             }
         });
