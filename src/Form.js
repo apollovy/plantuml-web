@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './Form.css'
 import DBManager from "./DBManager";
+import TextArea from "./TextArea";
 
 class Form extends Component {
     onSubmit: (x: string) => void;
@@ -11,30 +12,24 @@ class Form extends Component {
     constructor(props) {
         super(props);
 
-        const text = props.text;
         this.state = {
-            form: (
-                <form onSubmit={e => this.handleSubmit(e)}>
-                    <textarea onChange={e => this.handleChange(e)}
-                              defaultValue={text}
-                              onKeyUp={e => this.textAreaAdjust(e)}/>
-                    <input type="submit"/>
-                </form>
-            ),
-            text: text,
+            text: props.text,
         };
     }
 
     render() {
-        return this.state.form
+        return (
+            <form onSubmit={e => this.handleSubmit(e)}>
+                    <TextArea
+                        initialText={this.props.text}
+                        onChange={e => this.handleTextAreaChange(e)}
+                    />
+                <input type="submit"/>
+            </form>
+        )
     }
 
-    handleSubmit(event: Event) {
-        event.preventDefault();
-        this.props.onSubmit(this.state.text);
-    }
-
-    handleChange(event: Event) {
+    handleTextAreaChange(event: Event) {
         const target = event.target;
         const text = target.value;
 
@@ -42,13 +37,9 @@ class Form extends Component {
         this.props.dbManager.update(this.props.blockId, text);
     }
 
-    // noinspection JSMethodCanBeStatic
-    textAreaAdjust(e: Event) {
-        e.preventDefault();
-
-        const textArea = e.target;
-        textArea.style.height = "1px";
-        textArea.style.height = (25 + textArea.scrollHeight) + "px";
+    handleSubmit(event: Event) {
+        event.preventDefault();
+        this.props.onSubmit(this.state.text);
     }
 }
 
