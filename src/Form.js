@@ -10,12 +10,12 @@ class Form extends Component {
     text: string;
     destroy: (e: Event) => null;
 
+    _text: string;
+
     constructor(props) {
         super(props);
 
-        this.state = {
-            text: props.text,
-        };
+        this._text = props.text
     }
 
     render() {
@@ -35,16 +35,16 @@ class Form extends Component {
     }
 
     handleTextAreaChange(event: Event) {
-        const target = event.target;
-        const text = target.value;
+        // noinspection JSUnresolvedVariable
+        const text = event.target.value;
 
-        this.setState({text: text});
+        this._text = text;
         this.props.dbManager.update(this.props.blockId, text);
     }
 
     handleSubmit(event: Event) {
         event.preventDefault();
-        this.props.onSubmit(this.state.text);
+        this.props.onSubmit(this._text);
     }
 }
 
