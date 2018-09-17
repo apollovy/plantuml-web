@@ -28,7 +28,9 @@ class Form extends Component {
                 <input type="submit"/>
                 <button
                     onClick={e => this.props.destroy(e)}
-                    key="Delete">Delete
+                    key="Delete"
+                    className="Delete-button"
+                >Delete
                 </button>
             </form>
         )

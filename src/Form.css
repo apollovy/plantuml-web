@@ -5,3 +5,7 @@ form {
 textarea {
     width: 100%;
 }
+
+button.Delete-button {
+    float: right;
+}
