@@ -16,16 +16,14 @@ jobs:
         - node_modules
         key: v1-dependencies-{{ checksum "package.json" }}
     - run: yarn test
-
-  deploy:
-    machine:
-      enabled: true
-    steps:
-    - run:
-        name: Deploy Over SSH
-        command: |
-          if [ "${CIRCLE_BRANCH}" = "master" ]; then
-            rsync -avcze ssh ~/plantuml_react/build/ plantuml@apollov.tk:/home/apollov/apollov.tk/plantuml
-          else
-            echo "Not master branch, dry run only"
-          fi
+    - add_ssh_keys:
+        fingerprints:
+        - b3:6d:e8:7d:75:f9:ef:c6:43:50:6c:f1:10:47:65:52
+    - deploy:
+      name: Deploy Over SSH
+      command: |
+        if [ "${CIRCLE_BRANCH}" = "master" ]; then
+          rsync -avcze ssh ~/plantuml_react/build/ plantuml_react@apollov.tk:/home/plantuml_react/www
+        else
+          echo "Not master branch, dry run only"
+        fi
