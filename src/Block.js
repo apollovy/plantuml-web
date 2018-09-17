@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Form from "./Form";
 import Image from "./Image";
-import UrlField from "./UrlField";
 import DBManager from "./DBManager";
 import plantumlEncoder from "plantuml-encoder";
 
@@ -31,8 +30,9 @@ class Block extends Component {
                 key="Form"
                 destroy={e => this.destroy(e)}
             />,
-            <UrlField url={this.state.url} key="UrlField"/>,
-            <Image url={this.state.url} key="Image"/>,
+            <a href={this.state.url} target="_blank">
+                <Image url={this.state.url} key="Image"/>
+            </a>,
         ]
     }
 
