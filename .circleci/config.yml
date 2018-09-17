@@ -20,10 +20,10 @@ jobs:
         fingerprints:
         - b3:6d:e8:7d:75:f9:ef:c6:43:50:6c:f1:10:47:65:52
     - deploy:
-      name: Deploy Over SSH
-      command: |
-        if [ "${CIRCLE_BRANCH}" = "master" ]; then
-          rsync -avcze ssh ~/plantuml_react/build/ plantuml_react@apollov.tk:/home/plantuml_react/www
-        else
-          echo "Not master branch, dry run only"
-        fi
+        name: Deploy Over SSH
+        command: |
+          if [ "${CIRCLE_BRANCH}" = "master" ]; then
+            rsync -avcze ssh ~/plantuml_react/build/ plantuml_react@apollov.tk:/home/plantuml_react/www
+          else
+            echo "Not master branch, dry run only"
+          fi
