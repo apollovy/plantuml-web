@@ -1,0 +1,31 @@
+version: 2
+jobs:
+  build:
+    docker:
+    - image: circleci/node:7.10
+    working_directory: ~/plantuml_react
+    steps:
+    - checkout
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum "package.json" }}
+        - v1-dependencies-
+    - run: yarn install
+    - save_cache:
+        paths:
+        - node_modules
+        key: v1-dependencies-{{ checksum "package.json" }}
+    - run: yarn test
+
+  deploy:
+    machine:
+      enabled: true
+    steps:
+    - run:
+        name: Deploy Over SSH
+        command: |
+          if [ "${CIRCLE_BRANCH}" = "master" ]; then
+            rsync -avcze ssh ~/plantuml_react/build/ plantuml@apollov.tk:/home/apollov/apollov.tk/plantuml
+          else
+            echo "Not master branch, dry run only"
+          fi
