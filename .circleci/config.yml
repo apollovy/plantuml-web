@@ -20,14 +20,15 @@ jobs:
         fingerprints:
         - b3:6d:e8:7d:75:f9:ef:c6:43:50:6c:f1:10:47:65:52
     - run: sudo apt-get update && sudo apt-get install rsync
-    - add_ssh_keys:
-        fingerprints:
-        - 79:38:67:98:97:e4:5b:71:50:d2:ad:a4:55:da:b6:6f
+    - run:
+        name: Add to known hosts
+        command: |
+          mkdir -p ~/.ssh && echo "plantuml.apollov.tk,188.242.234.153 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQChD0BcUWrLgvLFNiNRQhfNKTz1Un9B7324K8lc2Aod2mysBDWfzOel9hloQ0gjy89QYrvSwBdTHizOy57c+X28UghMT50N36C9GhTRyGMj8y696gURnD1+Gb0cqUwhJx20UoLlwsn0OlbspAz4uDyUGKaV8Gz5jxmYcvexbbFxdqoWRgXbQr8vHmOB5gzdFudsAyfamEt29B4YO602cfcsB/dHKt9QbJZhTZLt7CLuhOWS7N7/U7+jvS6OUSNXmJ+ZNMgx86I+MF0d/bsWAM3pO3JGtDRDew3EpDIUfCEFFR638vc4XQQ7vSdrPaB6cxg8VvxRt47eoPv7MMn9HRLx" > ~/.ssh/known_hosts
     - deploy:
         name: Deploy Over SSH
         command: |
           if [ "${CIRCLE_BRANCH}" = "master" ]; then
-            rsync -avcze ssh ~/plantuml_react/build/ plantuml_react@apollov.tk:/home/plantuml_react/www
+            rsync -avcze ssh ~/plantuml_react/build/ plantuml_react@plantuml.apollov.tk:/home/plantuml_react/www
           else
             echo "Not master branch, dry run only"
           fi
