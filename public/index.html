@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--suppress JSUnresolvedLibraryURL -->
+    <script src="https://cdn.ravenjs.com/3.26.4/raven.min.js"
+            crossorigin="anonymous"></script>
+    <!--suppress JSUnresolvedVariable, JSUnresolvedFunction -->
+    <script type="text/javascript">
+        Raven.config(
+            'https://79d4799e188c4eb6aec3230734d890a8@sentry.io/1283277'
+        ).install()
+    </script>
     <meta charset="utf-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1, user-scalable=no">
