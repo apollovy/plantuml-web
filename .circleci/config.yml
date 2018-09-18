@@ -29,7 +29,7 @@ jobs:
         name: Deploy Over SSH
         command: |
           if [ "${CIRCLE_BRANCH}" = "master" ]; then
-            rsync -avcze ssh -delete ~/plantuml_react/build/ plantuml_react@plantuml.apollov.tk:/home/plantuml_react/www
+            rsync -avcze ssh --delete ~/plantuml_react/build/ plantuml_react@plantuml.apollov.tk:/home/plantuml_react/www
           else
             echo "Not master branch, dry run only"
           fi
