@@ -2,3 +2,6 @@ div.Block {
     border: 1px black solid;
     margin-top: 4px;
 }
+img {
+    max-width: 100%;
+}
