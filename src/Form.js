@@ -24,6 +24,7 @@ class Form extends Component {
                     <TextArea
                         initialText={this.props.text}
                         onChange={e => this.handleTextAreaChange(e)}
+                        onSubmit={e => this.handleSubmit(e)}
                     />
                 <input type="submit"/>
                 <button

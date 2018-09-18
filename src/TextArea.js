@@ -11,7 +11,9 @@ export default class TextArea extends Component {
             <textarea onChange={e => this.props.onChange(e)}
                       defaultValue={this.props.initialText}
                       ref={c => (this._textArea = c)}
-                      onKeyUp={e => this.handleKeyUp(e)}/>
+                      onKeyUp={e => this.handleKeyUp(e)}
+                      onKeyDown={e => this.handleKeyDown(e)}
+            />
         )
     }
 
@@ -24,6 +26,16 @@ export default class TextArea extends Component {
         e.preventDefault();
 
         this.resize(this._textArea);
+    }
+
+    // noinspection JSMethodCanBeStatic
+    handleKeyDown(e: KeyboardEvent) {
+        const modifierPressed = [e.ctrlKey, e.metaKey, e.shiftKey].some(
+            key => key);
+        if (e.key === "Enter" && modifierPressed) {
+            e.preventDefault();
+            this.props.onSubmit(e);
+        }
     }
 
     // noinspection JSMethodCanBeStatic
