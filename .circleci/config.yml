@@ -24,7 +24,7 @@ jobs:
         name: Add to known hosts
         command: |
           mkdir -p ~/.ssh && echo "plantuml.apollov.tk,188.242.234.153 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQChD0BcUWrLgvLFNiNRQhfNKTz1Un9B7324K8lc2Aod2mysBDWfzOel9hloQ0gjy89QYrvSwBdTHizOy57c+X28UghMT50N36C9GhTRyGMj8y696gURnD1+Gb0cqUwhJx20UoLlwsn0OlbspAz4uDyUGKaV8Gz5jxmYcvexbbFxdqoWRgXbQr8vHmOB5gzdFudsAyfamEt29B4YO602cfcsB/dHKt9QbJZhTZLt7CLuhOWS7N7/U7+jvS6OUSNXmJ+ZNMgx86I+MF0d/bsWAM3pO3JGtDRDew3EpDIUfCEFFR638vc4XQQ7vSdrPaB6cxg8VvxRt47eoPv7MMn9HRLx" > ~/.ssh/known_hosts
-    - run: npx react-scripts build
+    - run: npm run-script build
     - deploy:
         name: Deploy Over SSH
         command: |
