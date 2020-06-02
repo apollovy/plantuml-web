@@ -1,6 +1,6 @@
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 
-export default class TextArea extends Component {
+export default class TextArea extends PureComponent {
     initialText: string;
     onChange: (text: string) => null;
 
@@ -8,7 +8,7 @@ export default class TextArea extends Component {
 
     render() {
         return (
-            <textarea onChange={e => this.props.onChange(e)}
+            <textarea onChange={e => this.props.onChange(e, this._textArea)}
                       defaultValue={this.props.initialText}
                       ref={c => (this._textArea = c)}
                       onKeyUp={e => this.handleKeyUp(e)}
